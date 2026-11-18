@@ -10,6 +10,9 @@ import FAQSection from "@/components/FAQSection";
 import ContactSection from "@/components/ContactSection";
 import StickyContact from "@/components/StickyContact";
 import Footer from "@/components/Footer";
+import Preloader from "@/components/Preloader";
+import SmoothScroll from "@/components/SmoothScroll";
+import ScrollMarquee from "@/components/ScrollMarquee";
 import { Helmet } from "react-helmet-async";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -140,9 +143,12 @@ const Index = () => {
         <script type="application/ld+json">{JSON.stringify(orgJsonLd)}</script>
       </Helmet>
 
+      <SmoothScroll />
+      <Preloader />
       <main>
         <Navbar />
         <Hero />
+        <ScrollMarquee text="Novi Sad — Residences" />
         <Features />
         <ApartmentsGallery />
         <ConstructionProgress />

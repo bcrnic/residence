@@ -44,7 +44,7 @@ const MortgageCalculator = () => {
           </div>
         </ScrollReveal>
 
-        <ScrollReveal delay={0.15}>
+        <ScrollReveal delay={150}>
           <div className="bg-white/[0.03] border border-white/10 rounded-lg p-6 md:p-10">
             <div className="space-y-10 mb-10">
               <div>

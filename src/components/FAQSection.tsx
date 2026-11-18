@@ -11,8 +11,8 @@ const FAQSection = () => {
       <div className="container mx-auto px-4 max-w-3xl">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <p className="text-primary text-sm tracking-[0.3em] uppercase mb-3 font-body">{t(tr.faq.badge)}</p>
-            <h2 className="font-body text-[24px] font-medium text-foreground">
+            <p className="eyebrow mb-5">{t(tr.faq.badge)}</p>
+            <h2 className="font-heading text-[36px] md:text-[52px] font-light leading-[1.05] text-foreground">
               {t(tr.faq.title)} <span className="gold-gradient-text">{t(tr.faq.titleHighlight)}</span>
             </h2>
           </div>

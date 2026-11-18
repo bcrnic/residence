@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
+import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/motion";
 import { apartments, formatPrice, type Apartment } from "@/data/apartments";
 import { BedDouble, Maximize2, Building, ArrowRight, X, Images } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
@@ -14,6 +15,33 @@ const ApartmentsGallery = () => {
   const [lightboxApt, setLightboxApt] = useState<Apartment | null>(null);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const { t } = useLanguage();
+  const grid = useRef<HTMLDivElement>(null);
+  const firstRun = useRef(true);
+
+  // Cards rise in a stagger as they scroll into view, and again whenever the filter changes
+  useLayoutEffect(() => {
+    const el = grid.current;
+    if (!el || prefersReducedMotion()) return;
+    const cards = el.querySelectorAll<HTMLElement>("[data-apt-card]");
+
+    const ctx = gsap.context(() => {
+      if (firstRun.current) {
+        gsap.set(cards, { autoAlpha: 0, y: 60 });
+        ScrollTrigger.batch(cards, {
+          start: "top 90%",
+          once: true,
+          onEnter: (batch) =>
+            gsap.to(batch, { autoAlpha: 1, y: 0, duration: 1.2, stagger: 0.08, ease: "expo.out" }),
+        });
+      } else {
+        gsap.fromTo(cards, { autoAlpha: 0, y: 30 }, { autoAlpha: 1, y: 0, duration: 0.9, stagger: 0.05, ease: "expo.out" });
+        ScrollTrigger.refresh();
+      }
+    }, el);
+    firstRun.current = false;
+
+    return () => ctx.revert();
+  }, [activeFilter]);
 
   const filtered = activeFilter === 0
     ? apartments
@@ -31,8 +59,8 @@ const ApartmentsGallery = () => {
       <div className="container mx-auto px-4">
         <ScrollReveal>
           <div className="text-center mb-12">
-            <p className="text-primary text-sm tracking-[0.3em] uppercase mb-3 font-body">{t(tr.apartments.badge)}</p>
-            <h2 className="font-body text-[24px] font-medium text-white">
+            <p className="eyebrow mb-5">{t(tr.apartments.badge)}</p>
+            <h2 className="font-heading text-[36px] md:text-[52px] font-light leading-[1.05] text-white">
               {t(tr.apartments.title)} <span className="gold-gradient-text">{t(tr.apartments.titleHighlight)}</span>
             </h2>
             <p className="text-white/50 mt-4 font-body">
@@ -59,10 +87,10 @@ const ApartmentsGallery = () => {
         </div>
 
         {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div ref={grid} className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filtered.map((apt) => (
+            <div key={apt.id} data-apt-card>
             <div
-              key={apt.id}
               className={`group rounded-lg overflow-hidden card-hover bg-dark-lighter border border-white/5 hover:border-primary/20 hover:shadow-xl hover:shadow-primary/5 transition-all duration-500 ${
                 !apt.available ? "opacity-60" : ""
               }`}
@@ -100,6 +128,7 @@ const ApartmentsGallery = () => {
                   </button>
                 )}
               </div>
+            </div>
             </div>
           ))}
         </div>

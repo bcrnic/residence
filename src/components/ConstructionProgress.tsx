@@ -1,5 +1,6 @@
 import ScrollReveal from "./ScrollReveal";
 import { useEffect, useRef, useState } from "react";
+import { gsap, ScrollTrigger } from "@/lib/motion";
 import { HardHat, CheckCircle, Clock, Hammer } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import tr from "@/i18n/translations";
@@ -25,15 +26,27 @@ const ConstructionProgress = () => {
   const [started, setStarted] = useState(false);
   const { t } = useLanguage();
 
+  const pct = useRef<HTMLSpanElement>(null);
+
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { setStarted(true); observer.unobserve(el); } },
-      { threshold: 0.3 }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
+    const st = ScrollTrigger.create({
+      trigger: el,
+      start: "top 70%",
+      once: true,
+      onEnter: () => {
+        setStarted(true);
+        const n = { v: 0 };
+        gsap.to(n, {
+          v: overallProgress,
+          duration: 2,
+          ease: "power3.out",
+          onUpdate: () => { if (pct.current) pct.current.textContent = String(Math.round(n.v)); },
+        });
+      },
+    });
+    return () => st.kill();
   }, []);
 
   return (
@@ -41,8 +54,8 @@ const ConstructionProgress = () => {
       <div className="container mx-auto px-4 max-w-4xl">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <p className="text-primary text-sm tracking-[0.3em] uppercase mb-3 font-body">{t(tr.construction.badge)}</p>
-            <h2 className="font-body text-[24px] font-medium text-white">
+            <p className="eyebrow mb-5">{t(tr.construction.badge)}</p>
+            <h2 className="font-heading text-[36px] md:text-[52px] font-light leading-[1.05] text-white">
               {t(tr.construction.title)} <span className="gold-gradient-text">{t(tr.construction.titleHighlight)}</span>
             </h2>
           </div>
@@ -53,7 +66,7 @@ const ConstructionProgress = () => {
             <div className="flex items-center justify-center gap-3 mb-4">
               <HardHat className="text-primary" size={28} />
               <span className="text-white font-heading text-2xl font-bold">
-                {started ? overallProgress : 0}% {t(tr.construction.completed)}
+                <span ref={pct} className="tabular-nums">0</span>% {t(tr.construction.completed)}
               </span>
             </div>
             <div className="w-full h-4 rounded-full bg-white/10 overflow-hidden max-w-2xl mx-auto">

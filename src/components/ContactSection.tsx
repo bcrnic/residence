@@ -38,8 +38,8 @@ const ContactSection = () => {
       <div className="container mx-auto px-4">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <p className="text-primary text-sm tracking-[0.3em] uppercase mb-3 font-body">{t(tr.contact.badge)}</p>
-            <h2 className="font-body text-[24px] font-medium text-white">
+            <p className="eyebrow mb-5">{t(tr.contact.badge)}</p>
+            <h2 className="font-heading text-[36px] md:text-[52px] font-light leading-[1.05] text-white">
               {t(tr.contact.title)} <span className="gold-gradient-text">{t(tr.contact.titleHighlight)}</span>
             </h2>
             <p className="text-white/50 mt-4 font-body">{t(tr.contact.subtitle)}</p>
