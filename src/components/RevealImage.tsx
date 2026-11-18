@@ -49,8 +49,8 @@ const RevealImage = ({ src, alt, className, imgClassName, parallax = true }: Rev
   }, [parallax]);
 
   return (
-    <div ref={wrap} className={cn("overflow-hidden", className)}>
-      <img ref={img} src={src} alt={alt} loading="lazy" className={cn("w-full h-full object-cover scale-110", imgClassName)} />
+    <div ref={wrap} className={cn("overflow-hidden grain", className)}>
+      <img ref={img} src={src} alt={alt} loading="lazy" className={cn("photo-grade w-full h-full object-cover scale-110", imgClassName)} />
     </div>
   );
 };

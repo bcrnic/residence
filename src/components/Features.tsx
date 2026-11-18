@@ -20,7 +20,7 @@ const Features = () => {
           <div className="max-w-3xl mb-20 md:mb-32">
             <p className="eyebrow mb-5">{t(tr.features.badge)}</p>
             <h2 className="font-heading text-[36px] md:text-[52px] font-light leading-[1.05] text-foreground">
-              {t(tr.features.title)} <em className="text-primary">{t(tr.features.titleHighlight)}</em>
+              {t(tr.features.title)} {t(tr.features.titleHighlight)}
             </h2>
           </div>
         </ScrollReveal>

@@ -12,12 +12,12 @@ const translations = {
 
   // Hero
   hero: {
-    badge: { sr: "Novi stambeni kompleks", en: "New residential complex" },
-    title1: { sr: "Sigurna investicija", en: "A safe investment" },
-    title2: { sr: "u budućnost", en: "in the future" },
+    badge: { sr: "Novi Sad · useljenje krajem 2026.", en: "Novi Sad · move-in late 2026" },
+    title1: { sr: "Dvadeset stanova", en: "Twenty apartments" },
+    title2: { sr: "u Novom Sadu", en: "in Novi Sad" },
     subtitle: {
-      sr: "Premium stanovi po realnim cenama - od 52m² do 130m²",
-      en: "Premium apartments at real prices - from 52m² to 130m²",
+      sr: "Od dvosobnih do petosobnih, u zgradi koja je trenutno završena oko 75%.",
+      en: "From two- to five-room units, in a building that is currently about 75% complete.",
     },
     benefits: {
       smart: { sr: "Pametno isplanirano", en: "Smartly designed" },
@@ -30,29 +30,29 @@ const translations = {
 
   // Features
   features: {
-    badge: { sr: "Zašto mi", en: "Why us" },
-    title: { sr: "Kvalitet koji se", en: "Quality you can" },
-    titleHighlight: { sr: "vidi i oseća", en: "see and feel" },
+    badge: { sr: "Unutra", en: "Inside" },
+    title: { sr: "Šta dobijate", en: "What comes" },
+    titleHighlight: { sr: "u svakom stanu", en: "with every unit" },
     items: [
       {
-        title: { sr: "Pametno isplanirano", en: "Smartly designed" },
+        title: { sr: "Raspored", en: "Layout" },
         desc: {
-          sr: "Funkcionalni raspored sa maksimalnim iskorišćenjem prostora. Svaki kvadrat ima svoju svrhu.",
-          en: "Functional layout with maximum space utilization. Every square meter has its purpose.",
+          sr: "Dnevna soba i kuhinja izlaze na terasu, a spavaće sobe su odvojene od dnevne zone. Hodnik je sveden na ulaz.",
+          en: "Living room and kitchen open onto the terrace, bedrooms sit apart from the day zone, and the hallway is just the entrance.",
         },
       },
       {
-        title: { sr: "Svaki detalj", en: "Every detail" },
+        title: { sr: "Materijali", en: "Materials" },
         desc: {
-          sr: "Premium materijali i visokokvalitetna završna obrada. Italijanska keramika, parket od hrasta.",
-          en: "Premium materials and high-quality finishing. Italian ceramics, oak parquet.",
+          sr: "Hrastov parket u sobama, italijanska keramika u kupatilu i kuhinji, Grohe sanitarija, ALU-PVC prozori sa troslojnim staklom.",
+          en: "Oak parquet in the rooms, Italian tiles in the bathroom and kitchen, Grohe fittings, ALU-PVC windows with triple glazing.",
         },
       },
       {
-        title: { sr: "Komfor života", en: "Living comfort" },
+        title: { sr: "Grejanje", en: "Heating" },
         desc: {
-          sr: "Energetski efikasno, zvučno izolovano, sa modernim sistemima grejanja i hlađenja.",
-          en: "Energy efficient, soundproofed, with modern heating and cooling systems.",
+          sr: "Toplotna pumpa i energetski razred A, što znači niže račune zimi i leti. Između stanova je zvučna izolacija.",
+          en: "Heat pump and energy class A, which means lower bills in winter and summer. Units are acoustically separated.",
         },
       },
     ],
@@ -124,9 +124,9 @@ const translations = {
 
   // Investment Benefits
   investment: {
-    badge: { sr: "Investicija", en: "Investment" },
-    title: { sr: "Zašto investirati", en: "Why invest" },
-    titleHighlight: { sr: "sa nama", en: "with us" },
+    badge: { sr: "Kupovina", en: "Buying" },
+    title: { sr: "Dobro je", en: "Good to" },
+    titleHighlight: { sr: "da znate", en: "know" },
     items: [
       {
         title: { sr: "Lokacija", en: "Location" },
@@ -138,22 +138,22 @@ const translations = {
       {
         title: { sr: "Kvalitet gradnje", en: "Build quality" },
         desc: {
-          sr: "Najsavremeniji materijali, visoki standardi izolacije i energetska efikasnost klase A.",
-          en: "State-of-the-art materials, high insulation standards and class A energy efficiency.",
+          sr: "Napredak gradnje objavljujemo ovde, fazu po fazu, sa procentom završenosti za svaku fazu.",
+          en: "We post construction progress here, phase by phase, with a completion figure for each.",
         },
       },
       {
-        title: { sr: "Povrat investicije", en: "Return on investment" },
+        title: { sr: "Ako kupujete za izdavanje", en: "If you are buying to let" },
         desc: {
-          sr: "Očekivani prinos od iznajmljivanja 5-7% godišnje. Vrednost nekretnina raste 8% YoY.",
-          en: "Expected rental yield of 5-7% annually. Property values increase 8% YoY.",
+          sr: "Pokazaćemo vam računicu za konkretan stan: cenu, troškove i realnu kiriju u tom delu grada.",
+          en: "We will walk you through the numbers for a specific unit: price, costs and a realistic rent for the area.",
         },
       },
       {
-        title: { sr: "Garancija investitora", en: "Investor guarantee" },
+        title: { sr: "Plaćanje i garancija", en: "Payment & guarantee" },
         desc: {
-          sr: "Preko 10 godina iskustva u gradnji. Potpuna pravna sigurnost i garancija kvaliteta.",
-          en: "Over 10 years of construction experience. Full legal security and quality guarantee.",
+          sr: "Plaćanje po fazama gradnje (30/40/30) ili kreditom. Garancija je 2 godine na završne radove i 10 godina na konstrukciju.",
+          en: "Pay in construction stages (30/40/30) or by mortgage. Guarantee: 2 years on finishes, 10 years on the structure.",
         },
       },
     ],

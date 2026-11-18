@@ -3,6 +3,7 @@ import { ArrowDown } from "lucide-react";
 import heroImg from "@/assets/hero-building.jpg";
 import { useLanguage } from "@/i18n/LanguageContext";
 import tr from "@/i18n/translations";
+import { apartments, formatPrice } from "@/data/apartments";
 import { gsap, onIntro, prefersReducedMotion } from "@/lib/motion";
 
 const Hero = () => {
@@ -11,10 +12,12 @@ const Hero = () => {
   const img = useRef<HTMLImageElement>(null);
   const content = useRef<HTMLDivElement>(null);
 
-  const benefits = [
-    t(tr.hero.benefits.smart),
-    t(tr.hero.benefits.premium),
-    t(tr.hero.benefits.modern),
+  const sizes = apartments.map((a) => a.size);
+  const facts = [
+    { value: String(apartments.length), label: t({ sr: "stanova", en: "apartments" }) },
+    { value: `${Math.min(...sizes)}–${Math.max(...sizes)}`, label: "m²" },
+    { value: formatPrice(Math.min(...apartments.map((a) => a.price))), label: t({ sr: "€ najniža cena", en: "€ starting price" }) },
+    { value: "Q4 2026", label: t({ sr: "useljenje", en: "move-in" }) },
   ];
 
   useLayoutEffect(() => {
@@ -56,12 +59,12 @@ const Hero = () => {
   }, []);
 
   return (
-    <section ref={root} className="relative h-[100svh] min-h-[700px] flex items-end overflow-hidden bg-dark">
+    <section ref={root} className="grain relative h-[100svh] min-h-[700px] flex items-end overflow-hidden bg-dark">
       <img
         ref={img}
         src={heroImg}
         alt="Premium stambeni objekat"
-        className="absolute inset-0 w-full h-[115%] -top-[7%] object-cover will-change-transform"
+        className="photo-grade absolute inset-0 w-full h-[115%] -top-[7%] object-cover will-change-transform"
       />
       <div className="hero-overlay absolute inset-0" />
 
@@ -78,14 +81,14 @@ const Hero = () => {
             <p data-hero-fade className="font-body text-lg md:text-xl font-light text-white/75 mb-6">
               {t(tr.hero.subtitle)}
             </p>
-            <ul data-hero-fade className="flex flex-wrap gap-x-6 gap-y-2 text-white/60 text-xs tracking-[0.2em] uppercase">
-              {benefits.map((b) => (
-                <li key={b} className="flex items-center gap-2">
-                  <span className="w-1 h-1 rounded-full bg-primary" />
-                  {b}
-                </li>
+            <div data-hero-fade className="grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-4 border-t border-white/20 pt-5">
+              {facts.map((f) => (
+                <div key={f.label}>
+                  <p className="font-heading text-2xl md:text-3xl text-white leading-none">{f.value}</p>
+                  <p className="text-white/55 text-xs mt-1.5">{f.label}</p>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
 
           <div data-hero-fade className="flex flex-col sm:flex-row gap-4">

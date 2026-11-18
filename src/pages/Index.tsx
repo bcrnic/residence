@@ -5,7 +5,6 @@ import ApartmentsGallery from "@/components/ApartmentsGallery";
 import InvestmentBenefits from "@/components/InvestmentBenefits";
 import MortgageCalculator from "@/components/MortgageCalculator";
 import ConstructionProgress from "@/components/ConstructionProgress";
-import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import FAQSection from "@/components/FAQSection";
 import ContactSection from "@/components/ContactSection";
 import StickyContact from "@/components/StickyContact";
@@ -152,7 +151,6 @@ const Index = () => {
         <Features />
         <ApartmentsGallery />
         <ConstructionProgress />
-        <BeforeAfterSlider />
         <MortgageCalculator />
         <InvestmentBenefits />
         <FAQSection />
