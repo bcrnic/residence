@@ -1,50 +1,45 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useLayoutEffect, useRef, type ReactNode } from "react";
+import { gsap, EASE_OUT, prefersReducedMotion } from "@/lib/motion";
 
 interface ScrollRevealProps {
   children: ReactNode;
   className?: string;
+  /** Delay in milliseconds. */
   delay?: number;
   direction?: "up" | "down" | "left" | "right" | "scale";
 }
 
+const fromVars: Record<NonNullable<ScrollRevealProps["direction"]>, gsap.TweenVars> = {
+  up: { y: 60 },
+  down: { y: -60 },
+  left: { x: -60 },
+  right: { x: 60 },
+  scale: { scale: 0.92 },
+};
+
 const ScrollReveal = ({ children, className = "", delay = 0, direction = "up" }: ScrollRevealProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || prefersReducedMotion()) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.1 }
-    );
+    const ctx = gsap.context(() => {
+      gsap.from(el, {
+        ...fromVars[direction],
+        autoAlpha: 0,
+        duration: 1.4,
+        delay: delay / 1000,
+        ease: EASE_OUT,
+        scrollTrigger: { trigger: el, start: "top 88%", once: true },
+      });
+    }, el);
 
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  const hiddenStyles: Record<string, string> = {
-    up: "opacity-0 translate-y-12",
-    down: "opacity-0 -translate-y-12",
-    left: "opacity-0 translate-x-12",
-    right: "opacity-0 -translate-x-12",
-    scale: "opacity-0 scale-90",
-  };
+    return () => ctx.revert();
+  }, [delay, direction]);
 
   return (
-    <div
-      ref={ref}
-      className={`transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-        visible ? "opacity-100 translate-y-0 translate-x-0 scale-100" : hiddenStyles[direction]
-      } ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
+    <div ref={ref} className={className}>
       {children}
     </div>
   );

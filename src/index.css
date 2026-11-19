@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@300;400;500;600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,42 +6,43 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 220 20% 10%;
+    /* Cream + deep forest, with brass/gold accents */
+    --background: 44 38% 94%;
+    --foreground: 150 18% 12%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 20% 10%;
+    --card: 44 45% 97%;
+    --card-foreground: 150 18% 12%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 10%;
+    --popover: 44 45% 97%;
+    --popover-foreground: 150 18% 12%;
 
-    --primary: 43 60% 52%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 40 52% 48%;
+    --primary-foreground: 44 45% 97%;
 
-    --secondary: 220 15% 95%;
-    --secondary-foreground: 220 20% 10%;
+    --secondary: 42 28% 88%;
+    --secondary-foreground: 150 18% 12%;
 
-    --muted: 220 15% 95%;
-    --muted-foreground: 220 10% 45%;
+    --muted: 42 28% 88%;
+    --muted-foreground: 150 8% 38%;
 
-    --accent: 43 60% 52%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 40 52% 48%;
+    --accent-foreground: 44 45% 97%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 220 15% 90%;
-    --input: 220 15% 90%;
-    --ring: 43 60% 52%;
+    --border: 40 22% 82%;
+    --input: 40 22% 82%;
+    --ring: 40 52% 48%;
 
     --radius: 0.25rem;
 
     /* Custom luxury tokens */
-    --gold: 43 60% 52%;
-    --gold-light: 43 50% 70%;
-    --dark: 220 20% 8%;
-    --dark-lighter: 220 15% 15%;
-    --dark-overlay: 220 20% 8%;
+    --gold: 40 52% 52%;
+    --gold-light: 42 48% 72%;
+    --dark: 150 20% 9%;
+    --dark-lighter: 150 14% 14%;
+    --dark-overlay: 150 20% 9%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -111,20 +112,53 @@
     @apply text-primary;
   }
 
+  /* Kept for compatibility; highlighted words now read as plain text */
   .gold-gradient-text {
-    background: linear-gradient(135deg, hsl(43, 60%, 52%), hsl(43, 50%, 70%));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: inherit;
+  }
+
+  /* Tone down the glossy, over-saturated render look: flatter, warmer, slightly matte */
+  .photo-grade {
+    filter: saturate(0.72) contrast(0.96) brightness(1.02) sepia(0.08);
+  }
+
+  /* Film grain over imagery */
+  .grain {
+    position: relative;
+  }
+  .grain::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.16;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
   .hero-overlay {
     background: linear-gradient(
       to bottom,
-      hsla(220, 20%, 8%, 0.7) 0%,
-      hsla(220, 20%, 8%, 0.5) 50%,
-      hsla(220, 20%, 8%, 0.8) 100%
+      hsla(150, 20%, 9%, 0.55) 0%,
+      hsla(150, 20%, 9%, 0.25) 45%,
+      hsla(150, 20%, 9%, 0.85) 100%
     );
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-primary text-xs tracking-[0.35em] uppercase font-body;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply block h-px w-10 bg-primary/60;
+  }
+
+  /* Masked line used by split-text reveals */
+  .line-mask {
+    @apply block overflow-hidden pb-[0.08em];
+  }
+  .line-mask > span {
+    @apply block will-change-transform;
   }
 
   .card-hover {
@@ -148,7 +182,13 @@
   }
 }
 
-/* Smooth scrolling */
-html {
+/* Native smooth scroll only as a fallback; Lenis handles it otherwise */
+html:not(.lenis) {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:not(.lenis) {
+    scroll-behavior: auto;
+  }
 }

@@ -40,7 +40,7 @@ const Lightbox = ({ images, labels, isOpen, onClose, startIndex = 0 }: LightboxP
         <img
           src={images[current]}
           alt={labels?.[current] || `Slika ${current + 1}`}
-          className="w-full h-auto max-h-[75vh] object-contain rounded-lg"
+          className="photo-grade w-full h-auto max-h-[75vh] object-contain"
         />
         <div className="text-center mt-4">
           {labels?.[current] && (
@@ -69,7 +69,7 @@ const Lightbox = ({ images, labels, isOpen, onClose, startIndex = 0 }: LightboxP
               i === current ? "border-primary scale-110" : "border-white/20 opacity-60 hover:opacity-100"
             }`}
           >
-            <img src={img} alt="" className="w-full h-full object-cover" />
+            <img src={img} alt="" className="photo-grade w-full h-full object-cover" />
           </button>
         ))}
       </div>

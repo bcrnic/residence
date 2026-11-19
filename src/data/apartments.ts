@@ -3,9 +3,6 @@ import interiorKitchen from "@/assets/interior-kitchen.jpg";
 import interiorBedroom from "@/assets/interior-bedroom.jpg";
 import interiorBathroom from "@/assets/interior-bathroom.jpg";
 import interiorTerrace from "@/assets/interior-terrace.jpg";
-import floorplan2 from "@/assets/floorplan-2room.jpg";
-import floorplan3 from "@/assets/floorplan-3room.jpg";
-import floorplan4 from "@/assets/floorplan-4room.jpg";
 
 export interface Apartment {
   id: string;
@@ -26,16 +23,12 @@ const img = {
   bedroom: interiorBedroom,
   bathroom: interiorBathroom,
   terrace: interiorTerrace,
-  fp2: floorplan2,
-  fp3: floorplan3,
-  fp4: floorplan4,
 };
 
 const gallery2 = [
   { src: img.living, label: "Dnevna soba" },
   { src: img.kitchen, label: "Kuhinja" },
   { src: img.bathroom, label: "Kupatilo" },
-  { src: img.fp2, label: "Osnova stana" },
 ];
 
 const gallery25 = [
@@ -43,7 +36,6 @@ const gallery25 = [
   { src: img.living, label: "Dnevna soba" },
   { src: img.kitchen, label: "Kuhinja" },
   { src: img.bathroom, label: "Kupatilo" },
-  { src: img.fp2, label: "Osnova stana" },
 ];
 
 const gallery3 = [
@@ -51,7 +43,6 @@ const gallery3 = [
   { src: img.living, label: "Dnevna soba" },
   { src: img.bedroom, label: "Spavaća soba" },
   { src: img.terrace, label: "Terasa" },
-  { src: img.fp3, label: "Osnova stana" },
 ];
 
 const gallery4 = [
@@ -60,7 +51,6 @@ const gallery4 = [
   { src: img.kitchen, label: "Kuhinja" },
   { src: img.bathroom, label: "Kupatilo" },
   { src: img.terrace, label: "Terasa" },
-  { src: img.fp4, label: "Osnova stana" },
 ];
 
 const gallery5 = [
@@ -69,7 +59,6 @@ const gallery5 = [
   { src: img.bedroom, label: "Master spavaća" },
   { src: img.kitchen, label: "Kuhinja" },
   { src: img.bathroom, label: "Kupatilo" },
-  { src: img.fp4, label: "Osnova stana" },
 ];
 
 export const apartments: Apartment[] = [
