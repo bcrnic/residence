@@ -16,6 +16,20 @@ const ContactSection = () => {
     e.preventDefault();
     if (!form.phone.trim()) return;
 
+    // No backend configured: hand the inquiry off to WhatsApp instead
+    if (!supabase) {
+      const text = [
+        form.name.trim() && `Ime: ${form.name.trim()}`,
+        `Telefon: ${form.phone.trim()}`,
+        form.message.trim(),
+      ]
+        .filter(Boolean)
+        .join("\n");
+      window.open(`https://wa.me/381601234567?text=${encodeURIComponent(text)}`, "_blank", "noopener,noreferrer");
+      setForm({ name: "", phone: "", message: "" });
+      return;
+    }
+
     setLoading(true);
     const { error } = await supabase.from("leads").insert({
       name: form.name.trim() || null,
