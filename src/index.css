@@ -40,6 +40,7 @@
     /* Custom luxury tokens */
     --gold: 40 52% 52%;
     --gold-light: 42 48% 72%;
+    --gold-pale: 42 62% 84%;
     --dark: 150 20% 9%;
     --dark-lighter: 150 14% 14%;
     --dark-overlay: 150 20% 9%;
@@ -143,6 +144,24 @@
       hsla(150, 20%, 9%, 0.25) 45%,
       hsla(150, 20%, 9%, 0.85) 100%
     );
+  }
+
+  /* Darken the left side, where the hero copy sits, without dimming the whole photo */
+  .hero-overlay-side {
+    background: linear-gradient(
+      to right,
+      hsla(150, 20%, 7%, 0.7) 0%,
+      hsla(150, 20%, 7%, 0.45) 40%,
+      hsla(150, 20%, 7%, 0) 75%
+    );
+  }
+
+  /* Soft shadow so light text holds up over bright parts of the photo */
+  .hero-text {
+    text-shadow: 0 1px 2px hsla(150, 20%, 5%, 0.35), 0 2px 24px hsla(150, 20%, 5%, 0.45);
+  }
+  .hero-text a {
+    text-shadow: none;
   }
 
   .eyebrow {
